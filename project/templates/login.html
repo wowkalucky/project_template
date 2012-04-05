@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+  <li>
+    <a href="{% url socialauth_begin 'twitter' %}">Enter using Twitter</a>
+  </li>
+  <li>
+    <a href="{% url socialauth_begin 'facebook' %}">Enter using Facebook</a>
+  </li>
+  <li>
+    <a href="{% url socialauth_begin 'vkontakte-oauth2' %}">Enter using Vkontakte</a>
+  </li>
+</ul>
+{% endblock %}
