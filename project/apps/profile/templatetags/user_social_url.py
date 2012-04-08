@@ -12,9 +12,8 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_user_social_auth(context, user, provider):
-    provider_dict = {'twitter': 'Twitter',
-                     'facebook': 'Facebook',
-                     'vkontakte-oauth2': 'Vkontakte'}
+    provider_dict = {'google-oauth': 'Google',
+                     'facebook': 'Facebook'}
     users_accounts = UserSocialAuth.objects.filter(user=user, provider=provider)
     if users_accounts:
         users_account = users_accounts[0]

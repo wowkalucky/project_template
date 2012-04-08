@@ -11,9 +11,9 @@
 </ul>
 {% endif %}
 
-{% get_user_social_auth request.user 'twitter' %}
+{% get_user_social_auth request.user 'google-oauth' %}
 {% get_user_social_auth request.user 'facebook' %}
-{% get_user_social_auth request.user 'vkontakte-oauth2' %}
+
 <br />
 <a href='{% url profiles_edit_profile %}'>Edit pofile</a>
 {% endif %}
