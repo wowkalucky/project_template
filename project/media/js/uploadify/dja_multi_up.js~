@@ -1,0 +1,15 @@
+$(document).ready(function() {
+	$('#file_upload').uploadify({
+		'uploader'  : '/static/uploadify.swf',
+		'script'    : '/uploader/',
+		'cancelImg' : '/static/cancel.png',
+		'folder'    : '/static/userfiles',
+		'auto'      : true,
+		'multi'     : true,
+		'fileExt'   : '*.mp3;*.ogg;*.flac',
+		'fileDesc'  : 'Music Files',
+		'queueID'   : 'file_upload_queue',
+		'removeCompleted': false,
+	});
+});
+
