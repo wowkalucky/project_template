@@ -52,12 +52,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -70,12 +70,9 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'static'), )
 
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -97,6 +94,7 @@ TEMPLATE_LOADERS = (
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -134,6 +132,10 @@ INSTALLED_APPS = (
     'profiles',
 
     'project.apps.profile',
+
+    'tinymce',
+    'filebrowser',
+    'uploadify',
 )
 
 AUTH_PROFILE_MODULE = 'profile.UserProfile'
@@ -166,3 +168,67 @@ LOGGING = {
         },
     }
 }
+
+
+#TinyMCE widget configuration
+TINYMCE_JS_URL = "/static/tiny_mce/tiny_mce.js"
+TINYMCE_JS_ROOT = STATIC_ROOT + "/tiny_mce"
+TINYMCE_SPELLCHECKER=False
+TINYMCE_PLUGINS = [
+    'safari',
+    'table',
+    'advlink',
+    'advimage',
+    'iespell',
+    'inlinepopups',
+    'media',
+    'searchreplace',
+    'contextmenu',
+    'paste',
+    'wordcount'
+]
+
+TINYMCE_DEFAULT_CONFIG={
+    'theme' : "advanced",
+    'plugins' : ",".join(TINYMCE_PLUGINS), # django-cms
+
+'language' : 'ru',
+    'theme_advanced_buttons1' : "bullist,numlist,|,link,unlink,anchor,image",
+    'theme_advanced_buttons3' : "table,|,delete_row,delete_table,|,row_after,row_before",
+    'theme_advanced_buttons4' : "styleselect,formatselect,fontselect,fontsizeselect",
+    'theme_advanced_buttons2' : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,undo,redo,|,link,unlink,cleanup",
+    'theme_advanced_buttons4' : "",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_statusbar_location' : "bottom",
+    'theme_advanced_resizing' : True,
+    'table_default_cellpadding': 2,
+    'table_default_cellspacing': 2,
+    'cleanup_on_startup' : False,
+    'cleanup' : False,
+    'paste_auto_cleanup_on_paste' : False,
+    'paste_block_drop' : False,
+    'paste_remove_spans' : False,
+    'paste_strip_class_attributes' : False,
+    'paste_retain_style_properties' : "",
+    'forced_root_block' : False,
+    'force_br_newlines' : False,
+    'force_p_newlines' : False,
+    'remove_linebreaks' : False,
+    'convert_newlines_to_brs' : False,
+    'inline_styles' : False,
+    'relative_urls' : False,
+    'formats' : {
+        'alignleft' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-left'},
+        'aligncenter' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-center'},
+        'alignright' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-right'},
+        'alignfull' : {'selector' : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' : 'align-justify'},
+        'strikethrough' : {'inline' : 'del'},
+        'italic' : {'inline' : 'em'},
+        'bold' : {'inline' : 'strong'},
+        'underline' : {'inline' : 'u'}
+    },
+    'pagebreak_separator' : ""
+}
+#FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser'
+FILEBROWSER_DIRECTORY = 'filebrowser'

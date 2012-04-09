@@ -1,3 +1,7 @@
 django==1.4
 -e git+https://github.com/krvss/django-social-auth.git#egg=django-social-auth
 django-profiles
+django-tinymce
+
+-e git+git://github.com/dorosh/django-filebrowser-no-grappelli-for-django13.git#egg=django-filebrowser
+-e git+git://github.com/dorosh/django-uploadify.git#egg=django-uploadify

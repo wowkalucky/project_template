@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 
 admin.autodiscover()
@@ -15,4 +16,14 @@ urlpatterns = patterns('',
                     {'public_profile_field': 'public_profile_field'}),
     (r'^profiles/', include('profiles.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^uploadify/', include('uploadify.urls')),
+    url(r'^tinymce/filebrowser/', include('filebrowser.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}),
+    )
